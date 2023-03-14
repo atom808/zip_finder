@@ -3,10 +3,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:zip_finder/global/utils/theme_util.dart';
 import 'package:zip_finder/views/home_view.dart';
+import 'package:zip_finder/views/splash_screen.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.deleteBoxFromDisk('addressHistoryBox');
   await Hive.openBox('addressHistoryBox');
   runApp(const MyApp());
 }
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.grey.shade800,
           ),
           themeMode: themeProvider.themeMode,
-          home: const HomeView(),
+          home: const SplashScreen(),
         );
       },
     );
