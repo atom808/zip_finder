@@ -5,7 +5,8 @@ class DefaultAppBar extends AppBar {
   final bool showPop;
   final List<Widget>? trailing;
 
-  DefaultAppBar({super.key, required this.titleText, this.showPop = true, this.trailing});
+  DefaultAppBar(
+      {super.key, required this.titleText, this.showPop = true, this.trailing});
 
   Widget build(BuildContext context) {
     return AppBar(
@@ -22,5 +23,3 @@ class DefaultAppBar extends AppBar {
     );
   }
 }
-
-

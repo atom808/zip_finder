@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zip_finder/global/widgets/default_appbar.dart';
+import 'package:zip_finder/views/search_view.dart';
 import 'package:zip_finder/views/settings_view.dart';
 
 import '../global/utils/theme_util.dart';
@@ -51,7 +52,7 @@ Widget _buildHomeBody(BuildContext context) {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SettingsView(),
+                  builder: (context) => const SearchView(),
                 ),
               ),
             ),
