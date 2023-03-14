@@ -1,35 +1,36 @@
 import 'dart:convert';
 
-AddressModel addressModelFromJson(String str) => AddressModel.fromJson(json.decode(str));
+AddressModel addressModelFromJson(String str) =>
+    AddressModel.fromJson(json.decode(str));
 
 String addressModelToJson(AddressModel data) => json.encode(data.toJson());
 
 class AddressModel {
-    AddressModel({
-        required this.cep,
-        required this.logradouro,
-        required this.complemento,
-        required this.bairro,
-        required this.localidade,
-        required this.uf,
-        required this.ibge,
-        required this.gia,
-        required this.ddd,
-        required this.siafi,
-    });
+  AddressModel({
+    required this.cep,
+    required this.logradouro,
+    this.complemento,
+    required this.bairro,
+    required this.localidade,
+    required this.uf,
+    this.ibge,
+    this.gia,
+    required this.ddd,
+    this.siafi,
+  });
 
-    String cep;
-    String logradouro;
-    String complemento;
-    String bairro;
-    String localidade;
-    String uf;
-    String ibge;
-    String gia;
-    String ddd;
-    String siafi;
+  String cep;
+  String logradouro;
+  String? complemento;
+  String bairro;
+  String localidade;
+  String uf;
+  String? ibge;
+  String? gia;
+  String ddd;
+  String? siafi;
 
-    factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
+  factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
         cep: json["cep"],
         logradouro: json["logradouro"],
         complemento: json["complemento"],
@@ -40,9 +41,9 @@ class AddressModel {
         gia: json["gia"],
         ddd: json["ddd"],
         siafi: json["siafi"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "cep": cep,
         "logradouro": logradouro,
         "complemento": complemento,
@@ -53,5 +54,5 @@ class AddressModel {
         "gia": gia,
         "ddd": ddd,
         "siafi": siafi,
-    };
+      };
 }

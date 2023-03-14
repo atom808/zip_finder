@@ -14,15 +14,30 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  final _cepController = TextEditingController();
-  final _logradouroController = TextEditingController();
-  final _complementoController = TextEditingController();
-  final _numeroController = TextEditingController();
-  final _bairroController = TextEditingController();
-  final _cidadeController = TextEditingController();
-  final _estadoController = TextEditingController();
-
   final _provider = AddressProvider();
+
+  late List<Map> _fieldList;
+
+  @override
+  void initState() {
+    _fieldList = [
+      {
+        'controller': _provider.complementoController,
+        'placeholder': 'Complemento'
+      },
+      {'controller': _provider.bairroController, 'placeholder': 'Bairro'},
+      {
+        'controller': _provider.localidadeController,
+        'placeholder': 'Localidade'
+      },
+      {'controller': _provider.ufController, 'placeholder': 'UF'},
+      {'controller': _provider.ibgeController, 'placeholder': 'IBGE'},
+      {'controller': _provider.giaController, 'placeholder': 'Gia'},
+      {'controller': _provider.dddController, 'placeholder': 'DDD'},
+      {'controller': _provider.siafiController, 'placeholder': 'Siafi'},
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +47,12 @@ class _SearchViewState extends State<SearchView> {
       body: Column(
         children: [
           CustomTextField(
+              context: context,
               margin: const EdgeInsets.all(24),
-              controller: _cepController,
+              controller: _provider.cepController,
               placeholder: 'Insira o CEP que deseja buscar',
               maxLength: 8,
+              enabled: !_provider.loading,
               onChanged: (text) {
                 if (text.length == 8) {
                   _provider.getAddress(context, cep: text);
@@ -58,34 +75,27 @@ class _SearchViewState extends State<SearchView> {
                   color: Colors.transparent,
                 ),
                 CustomTextField(
-                  controller: _logradouroController,
+                  context: context,
+                  controller: _provider.logradouroController,
                   placeholder: 'Logradouro',
                   enabled: false,
                   readOnly: true,
                 ),
-                Flex(
-                  direction: Axis.horizontal,
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextField(
-                        controller: _numeroController,
-                        placeholder: 'Número',
-                        enabled: false,
-                        readOnly: true,
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextField(
-                        controller: _complementoController,
-                        placeholder: 'Complemento',
-                        enabled: false,
-                        readOnly: true,
-                      ),
-                    ),
-                  ],
-                ),
+                GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: _fieldList.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisExtent: 72,
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (context, index) => CustomTextField(
+                    context: context,
+                    controller: _fieldList[index]['controller'],
+                    placeholder: _fieldList[index]['placeholder'],
+                    enabled: false,
+                    readOnly: true,
+                  ),
+                )
               ]),
             ),
           ),
