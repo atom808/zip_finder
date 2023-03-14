@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:zip_finder/global/utils/theme_util.dart';
 import 'package:zip_finder/views/home_view.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.deleteBoxFromDisk('addressHistoryBox');
+  await Hive.openBox('addressHistoryBox');
   runApp(const MyApp());
 }
 

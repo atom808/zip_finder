@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:zip_finder/global/utils/string_util.dart';
+
 AddressModel addressModelFromJson(String str) =>
     AddressModel.fromJson(json.decode(str));
 
@@ -31,7 +34,8 @@ class AddressModel {
   String? siafi;
 
   factory AddressModel.fromJson(Map<String, dynamic> json) => AddressModel(
-        cep: json["cep"],
+        cep: UtilBrasilFields.obterCep(
+            json["cep"].toString().cleanStringAndSpaces),
         logradouro: json["logradouro"],
         complemento: json["complemento"],
         bairro: json["bairro"],

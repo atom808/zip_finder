@@ -58,8 +58,8 @@ Widget _buildHomeBody(BuildContext context) {
             ),
             const VerticalDivider(width: 12),
             _buildHomeButton(
-              title: 'Histórico',
-              icon: Icons.history,
+              title: 'Configurações',
+              icon: Icons.settings,
               context: context,
               onTap: () => Navigator.push(
                 context,
@@ -70,7 +70,7 @@ Widget _buildHomeBody(BuildContext context) {
             ),
           ],
         ),
-      )
+      ),
     ],
   );
 }

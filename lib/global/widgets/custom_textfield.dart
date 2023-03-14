@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/theme_util.dart';
@@ -12,6 +13,8 @@ class CustomTextField extends StatefulWidget {
   final EdgeInsetsGeometry margin;
   final void Function(String text)? onChanged;
   final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
+
   const CustomTextField(
       {super.key,
       required this.placeholder,
@@ -21,7 +24,8 @@ class CustomTextField extends StatefulWidget {
       required this.controller,
       this.margin = const EdgeInsets.all(8.0),
       this.maxLength,
-      required this.context});
+      required this.context,
+      this.inputFormatters});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -36,6 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextField(
         controller: widget.controller,
         onChanged: widget.onChanged,
+        onSubmitted: widget.onChanged,
         decoration: InputDecoration(
           hintText: widget.placeholder,
           hintStyle: TextStyle(
@@ -72,6 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         enabled: widget.enabled,
         readOnly: widget.readOnly,
         maxLength: widget.maxLength,
+        inputFormatters: widget.inputFormatters,
       ),
     );
   }
